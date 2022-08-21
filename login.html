@@ -8,7 +8,8 @@
   
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/signin.css" rel="stylesheet">
+
   <style>
     body {
       background-color: rgb(248, 249, 250);
@@ -17,12 +18,32 @@
 </head>
 
 <body>
-  <main class="mt-5">
+  <main class="pb-5">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      <div class="row">
+      <form id="form-login">
+        <img class="mb-4" src="images/login.png" alt="" width="" height="200">
+        <h1 class="h3 mb-3 fw-normal">Registro</h1>
+    
+        <div class="form-floating">
+          <input type="email" class="form-control" id="email" placeholder="name@example.com">
+          <label for="floatingInput">Correo electrónico</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="password" placeholder="Password">
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+    
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Recuerda mi contraseña
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+      </form>
+      
     </div>
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">
