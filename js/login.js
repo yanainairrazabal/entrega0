@@ -6,11 +6,6 @@ function setAlert(msg){
     document.getElementById("alert-container").innerHTML = `<div class='alert alert-danger alert-dismissible' role='alert'>${msg}</div>`; 
 }
 
-function validateEmail(value) {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(value);
-}
-
 function validate(event){
     event.preventDefault()
     let email = document.getElementById("email");
