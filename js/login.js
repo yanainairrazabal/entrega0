@@ -5,14 +5,9 @@ function setAlert(msg){
 }
 
 function validate(event){
-    event.preventDefault()
+    event.preventDefault();
     let email = document.getElementById("email");
     let password = document.getElementById("password");
-
-    if(password.value.length <1) {
-        setAlert("El password debe contener caracteres!");
-        return false;
-    }
     
     if(email.value !== "jap@gmail.com" || password.value !=="123") {
         setAlert("Las credenciales no son validas!");
