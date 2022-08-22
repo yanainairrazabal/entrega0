@@ -1,6 +1,4 @@
 let form = document.getElementById("form-login");
-let container_listing = document.getElementById("container-listing");
-let container_login = document.getElementById("container-login");
 
 function setAlert(msg){
     document.getElementById("alert-container").innerHTML = `<div class='alert alert-danger alert-dismissible' role='alert'>${msg}</div>`; 
