@@ -40,8 +40,9 @@ function buildProducts(products) {
         document.getElementById("products-container").innerHTML+= buildCard(product.name, product.currency, product.cost, product.image, product.description, product.soldCount);
     });
 }
+let productCategory = localStorage.getItem("catID");
 
-fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
+fetch(`https://japceibal.github.io/emercado-api/cats_products/${productCategory}.json`)
 .then(response => response.json())
 .then(function(data) {
     document.getElementById("category-title").innerText=data.catName;

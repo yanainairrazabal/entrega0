@@ -13,6 +13,7 @@ function validate(event){
         setAlert("Las credenciales no son validas!");
         return false;
     }
+    localStorage.setItem("username", email.value);
     window.location.replace("index.html");
 }
 

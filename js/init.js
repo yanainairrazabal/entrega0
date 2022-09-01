@@ -39,3 +39,7 @@ let getJSONData = function(url){
         return result;
     });
 }
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("login-link").style.display = "none";
+  document.getElementById("username").innerHTML = localStorage.getItem("username");
+});
