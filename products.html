@@ -47,28 +47,31 @@
         <div class="col text-end">
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
             <input type="radio" class="btn-check" name="options" id="sortAsc">
-            <label class="btn btn-light" for="sortAsc">A-Z</label>
+            <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort-amount-down mr-1"></i>1-9</label>
             <input type="radio" class="btn-check" name="options" id="sortDesc">
-            <label class="btn btn-light" for="sortDesc">Z-A</label>
+            <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1"></i>9-1</label>
             <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
+            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i>Relevance</label>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+        <div class="col-lg-12 offset-lg-12 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
-            <div class="col">
+            <div class="col-lg-4">
+              <input class="form-control" type="text" placeholder="buscar..." id="search">
+            </div>
+            <div class="col-2">
               <p class="font-weight-normal text-end my-2">Cant.</p>
             </div>
-            <div class="col">
+            <div class="col-2">
               <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
             </div>
-            <div class="col">
+            <div class="col-2">
               <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
             </div>
-            <div class="col-3 p-0">
-              <div class="btn-group" role="group">
+            <div class="col-2 p-0">
+              <div class="btn-group float-end" role="group">
                 <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
                 <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
               </div>

@@ -1,3 +1,11 @@
+const ORDER_ASC_BY_PRICE = "ASC";
+const ORDER_DESC_BY_PRICE = "DESC";
+const ORDER_BY_PROD_COUNT = "Cant.";
+let productCategory = localStorage.getItem("catID");
+let products = null;
+
+let minCount = undefined;
+let maxCount = undefined;
 
 function buildCard(title, currency, price, image, description, sold) {
     return `
@@ -38,12 +46,21 @@ function buildCard(title, currency, price, image, description, sold) {
 function buildProducts(products) {
     document.getElementById("products-container").innerHTML = ""; 
     products.forEach(product => {
-        document.getElementById("products-container").innerHTML+= buildCard(product.name, product.currency, product.cost, product.image, product.description, product.soldCount);
+        if(isInPriceRange(product)) {
+            if (matchWithSearch(product)){
+                document.getElementById("products-container").innerHTML+= buildCard(product.name, product.currency, product.cost, product.image, product.description, product.soldCount);
+            }
+        }
     });
 }
 
-let productCategory = localStorage.getItem("catID");
-let products = null;
+function matchWithSearch(product){
+    let searchValue = document.getElementById("search").value.toLowerCase();
+    if (searchValue != ""){
+        return (product.name.toLowerCase().search(searchValue) != -1 || product.description.toLowerCase().search(searchValue) != -1);
+    }
+    return true;
+}
 
 function getProductsAndShow() {
     fetch(`https://japceibal.github.io/emercado-api/cats_products/${productCategory}.json`)
@@ -55,24 +72,15 @@ function getProductsAndShow() {
     });
 }
 
-const ORDER_ASC_BY_NAME = "AZ";
-const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
-let currentCategoriesArray = [];
-let currentSortCriteria = undefined;
-let minCount = undefined;
-let maxCount = undefined;
-
-function sortCategories(criteria, array){
+function sortProduct(criteria, array){
     let result = [];
-    if (criteria === ORDER_ASC_BY_NAME)
-    {
+    if (criteria === ORDER_ASC_BY_PRICE){
         result = array.sort(function(a, b) {
             if ( a.cost < b.cost ){ return -1; }
             if ( a.cost > b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){
+    }else if (criteria === ORDER_DESC_BY_PRICE){
         result = array.sort(function(a, b) {
             if ( a.cost > b.cost ){ return -1; }
             if ( a.cost < b.cost ){ return 1; }
@@ -102,28 +110,25 @@ function isInPriceRange(product){
 ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount)));
 }
 
-function sortAndShowCategories(sortCriteria){
+function sort(sortCriteria){
     currentSortCriteria = sortCriteria;
-    products = sortCategories(currentSortCriteria, products);
+    products = sortProduct(currentSortCriteria, products);
     buildProducts(products);
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     getProductsAndShow();
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
+        sort(ORDER_ASC_BY_PRICE);
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_NAME);
+        sort(ORDER_DESC_BY_PRICE);
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        sort(ORDER_BY_PROD_COUNT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
@@ -137,8 +142,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
-        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-        //de productos por categoría.
         minCount = document.getElementById("rangeFilterCountMin").value;
         maxCount = document.getElementById("rangeFilterCountMax").value;
 
@@ -156,7 +159,10 @@ document.addEventListener("DOMContentLoaded", function(e){
             maxCount = undefined;
         }
 
-        let sorted = products.filter(isInPriceRange);
-        buildProducts(sorted);
+        buildProducts(products);
+    });
+
+    document.getElementById("search").addEventListener("input", function(){
+        buildProducts(products);
     });
 });
