@@ -7,9 +7,9 @@ let products = null;
 let minCount = undefined;
 let maxCount = undefined;
 
-function buildCard(title, currency, price, image, description, sold) {
+function buildCard(id, title, currency, price, image, description, sold) {
     return `
-    <div class="row justify-content-center mt-3 mb-1">
+    <div class="row justify-content-center mt-3 mb-1" onclick="setProduct(${id})">
         <div class="col-md-12">
             <div class="card shadow-0 border rounded-3">
                 <div class="card-body product">
@@ -48,7 +48,7 @@ function buildProducts(products) {
     products.forEach(product => {
         if(isInPriceRange(product)) {
             if (matchWithSearch(product)){
-                document.getElementById("products-container").innerHTML+= buildCard(product.name, product.currency, product.cost, product.image, product.description, product.soldCount);
+                document.getElementById("products-container").innerHTML+= buildCard(product.id, product.name, product.currency, product.cost, product.image, product.description, product.soldCount);
             }
         }
     });
@@ -103,6 +103,11 @@ function sortProduct(criteria, array){
 function setCatID(id) {
     localStorage.setItem("catID", id);
     window.location = "products.html"
+}
+
+function setProduct (id){
+    localStorage.setItem("productId", id);
+    window.location = "product-info.html"
 }
 
 function isInPriceRange(product){
