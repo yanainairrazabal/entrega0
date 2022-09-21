@@ -51,7 +51,25 @@
         <b>Imagenes ilustrativas</b> 
         <div class="row m-2" id="images-container">
         </div>
-        <div class="col-12" id="comments-container">
+        <div class="col-12 mt-5" id="comments-container">
+        </div>
+        <div class="col-12 mt-5" id="new-comment-container">
+          <h4>Comentar</h4>
+          <label>Tu opinión:</label>
+          <form id="new-comment">
+            <textarea placeholder="mensaje" id="comment" required></textarea>
+            <br>
+            <label>Tu puntuación:</label>
+            <select id="score">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br>
+            <input type="submit" value="enviar">
+          </form>
         </div>
   </main>
   <footer class="text-muted">

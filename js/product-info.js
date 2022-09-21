@@ -21,7 +21,7 @@ function buildComment(dateTime, user, description, score){
     
     <b>${user}</b> ${dateTime}
      ${scoreHtml} 
-    <div class="row">
+    <div class="">
     ${description}
         </div>
     </div> <br>`;
@@ -62,13 +62,21 @@ function buildCard(id, title, currency, price, images, description, sold, catego
     });
     
 }
-
-
-
-
-
+let score = 1;
+document.getElementById("score").addEventListener("change", function(){
+    let options = this.options[document.getElementById("score").selectedIndex];
+    score = options.value;
+});
 
 document.addEventListener("DOMContentLoaded", function(e){
     getProductInformation();
     getProductComments();
+});
+
+document.getElementById("new-comment").addEventListener("submit", function(e){
+    e.preventDefault();
+    let message = document.getElementById("comment").value;
+    let date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    document.getElementById("comments-container").innerHTML+= buildComment(date, localStorage.getItem("username"), message, score);
+    document.getElementById("comment").value = "";
 });
