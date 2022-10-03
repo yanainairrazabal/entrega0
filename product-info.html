@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/product-info.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,47 +31,68 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html" id="login-link">Ingresar</a>
-            <a class="nav-link" href="#" id="username"></a>
-          </li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="login.html">Ingresar</a></li>
+          <div class="dropdown only-logged">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+             <span id="username"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="user-menu">
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar sesión</a></li>
+            </ul>
+          </div>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    
-      <div class="row justify-content-center m-5">
-        <div class="col-md-12"> <h5 id="title"></h5></div>
-        <span class="border-top"></span>
-
-        <div class="col-md-12"> <b>Precio</b> <p id="price"></p></div>
-        <div class="col-md-12"><b>Descripción</b> <p id="description"></p></div>
-        <div class="col-md-12"> <b> Categoría</b><p id="category"></p></div>
-        <div class="col-md-12"> <b>Cantidad de vendidos</b> <p id="sold"></p></div>
-        <b>Imagenes ilustrativas</b> 
-        <div class="row m-2" id="images-container">
+    <div class="row justify-content-center m-5">
+      <div class="col-md-12"> <h5 id="title"></h5></div>
+      <span class="border-top"></span>
+      <div class="col-md-12"> <b>Precio</b> <p id="price"></p></div>
+      <div class="col-md-12"><b>Descripción</b> <p id="description"></p></div>
+      <div class="col-md-12"> <b> Categoría</b><p id="category"></p></div>
+      <div class="col-md-12"> <b>Cantidad de vendidos</b> <p id="sold"></p></div>
+      <b>Imagenes ilustrativas</b> 
+      <div id="carouselExampleControls" class="carousel col-md-8 slide" data-bs-ride="carousel">
+        <div class="carousel-inner" id="images-container">
         </div>
-        <div class="col-12 mt-5" id="comments-container">
-        </div>
-        <div class="col-12 mt-5" id="new-comment-container">
-          <h4>Comentar</h4>
-          <label>Tu opinión:</label>
-          <form id="new-comment">
-            <textarea placeholder="mensaje" id="comment" required></textarea>
-            <br>
-            <label>Tu puntuación:</label>
-            <select id="score">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <br>
-            <input type="submit" value="enviar">
-          </form>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="row m-2" id="">
+      </div>
+      <div class="col-12 mt-5" id="comments-container">
+      </div>
+      <div class="col-12 mt-5" id="new-comment-container">
+        <h4>Comentar</h4>
+        <label>Tu opinión:</label>
+        <form id="new-comment">
+          <textarea placeholder="mensaje" id="comment" required></textarea>
+          <br>
+          <label>Tu puntuación:</label>
+          <select id="score">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <br>
+          <input type="submit" value="enviar">
+        </form>
+      </div>
+      <div class="col-12 mt-5">
+        <p class="text-center"><b>Productos relacionados</b></p> 
+        <div class="row m-2" id="related-container"></div>
+      </div>
   </main>
   <footer class="text-muted">
     <div class="container">

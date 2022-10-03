@@ -29,10 +29,17 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html" id="login-link">Ingresar</a>
-            <a class="nav-link" href="#" id="username"></a>
-          </li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="login.html">Ingresar</a></li>
+          <div class="dropdown only-logged">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+             <span id="username"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="user-menu">
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="#" onclick="logout()">Cerrar sesión</a></li>
+            </ul>
+          </div>
         </ul>
       </div>
     </div>

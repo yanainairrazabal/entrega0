@@ -1,4 +1,5 @@
 let form = document.getElementById("form-login");
+localStorage.setItem("logged", false);
 
 function setAlert(msg){
     document.getElementById("alert-container").innerHTML = `<div class='alert alert-danger alert-dismissible' role='alert'>${msg}</div>`; 
@@ -13,6 +14,7 @@ function validate(event){
         setAlert("Las credenciales no son validas!");
         return false;
     }
+    localStorage.setItem("logged", true);
     localStorage.setItem("username", email.value);
     window.location.replace("index.html");
 }

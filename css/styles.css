@@ -196,3 +196,8 @@ a.custom-card:hover {
 #username {
   color: rgba(255,255,255,.55);
 }
+
+#user-menu {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}

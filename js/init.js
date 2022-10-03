@@ -39,7 +39,25 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+function logout(){
+  localStorage.setItem("logged", false);
+  localStorage.setItem("username", null);
+  window.location.replace("login.html");
+}
+
 document.addEventListener("DOMContentLoaded", function(){
-  document.getElementById("login-link").style.display = "none";
-  document.getElementById("username").innerHTML = localStorage.getItem("username");
+  if(localStorage.getItem("logged") == "true"){
+    document.querySelectorAll(".only-logged").forEach(element => {
+      element.style.display = "block";
+    });
+    document.getElementById("login-link").style.display = "none";
+    document.getElementById("username").innerHTML = localStorage.getItem("username");
+  }else{
+    document.querySelectorAll(".only-logged").forEach(element => {
+      element.style.display = "none";
+    });
+    document.getElementById("login-link").style.display = "block";
+    document.getElementById("username").innerHTML = "";
+  }
 });
