@@ -16,6 +16,7 @@ function validate(event){
     }
     localStorage.setItem("logged", true);
     localStorage.setItem("username", email.value);
+    localStorage.setItem("id", 25801);
     window.location.replace("index.html");
 }
 

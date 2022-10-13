@@ -43,6 +43,7 @@ let getJSONData = function(url){
 function logout(){
   localStorage.setItem("logged", false);
   localStorage.setItem("username", null);
+  localStorage.setItem("id", null);
   window.location.replace("login.html");
 }
 
