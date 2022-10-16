@@ -9,7 +9,7 @@ function addRow (product){
     <th scope="row"><img src="${product.image}" height="50"/></th>
     <td>${product.name}</td>
     <td>${product.unitCost}</td>
-    <td><input onchange="updatePrice(${product.id}, ${product.unitCost}, this)" value="${product.count}"/></td>
+    <td><input type="number" min="1" onchange="updatePrice(${product.id}, ${product.unitCost}, this)" value="${product.count}"/></td>
     <td>${product.currency} <span id="${product.id}-price">${product.unitCost*product.count}</td>
   </tr>`;
 }
@@ -24,5 +24,13 @@ function buildCart (products){
 fetch("https://japceibal.github.io/emercado-api/user_cart/25801.json")
 .then(response => response.json())
 .then(function(data) {
-    buildCart(data.articles);
+    let cart = localStorage.getItem("cart");
+    if(cart != undefined) {
+        cart = JSON.parse(cart);
+    }else{
+        cart = []; 
+    }
+
+    let articles = data.articles.concat(cart);
+    buildCart(articles);
 });

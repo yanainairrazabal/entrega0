@@ -1,4 +1,5 @@
 let productId= localStorage.getItem("productId");
+let cart=localStorage.getItem("cart");
 
 function setProduct (id){
     localStorage.setItem("productId", id);
@@ -24,6 +25,7 @@ function getProductInformation() {
 .then(response => response.json())
 .then(function(data) {
         buildCard(data.id, data.name, data.currency, data.cost, data.images, data.description, data.soldCount, data.category);
+        buildBuyItButon(data);
         buildRelated(data.relatedProducts);
     });
 }
@@ -59,6 +61,40 @@ function getProductComments() {
 .then(response => response.json())
 .then(function(data) {
         buildComments(data);
+    });
+}
+
+function buildBuyItButon(data) {
+    document.getElementById("buy-button").addEventListener('click', function(e) {
+        cart = localStorage.getItem("cart");
+        if(cart == undefined) {
+            cart = [];
+        }else{
+            cart = JSON.parse(cart);
+        }
+
+        let alreadyAdded = false; 
+
+        cart.forEach((p) =>{
+            if(p.id == data.id){
+                p.count += 1;
+                alreadyAdded=true;
+            }
+        });
+
+        if(!alreadyAdded) {
+            let product = {
+                "id" : data.id, 
+                "name" : data.name, 
+                "count" : 1,
+                "unitCost" : data.cost, 
+                "currency" : data.currency, 
+                "image" : data.images[0]
+            };
+            cart.push(product);
+        }
+        
+        localStorage.setItem("cart", JSON.stringify(cart));
     });
 }
 
