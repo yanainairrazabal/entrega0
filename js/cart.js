@@ -15,9 +15,11 @@ document.addEventListener("DOMContentLoaded", function(){
             inputsTransfer.forEach((input)=>{input.disabled = true;});
 
             if(radio.value == "credit-card") {
+                document.getElementById("selected-payment-type").innerHTML = "Tarjeta de credito";
                 inputsCreditCard.forEach((input)=>{input.disabled = false;});
                 inputsTransfer.forEach((input)=>{input.disabled = true;});
             }else{
+                document.getElementById("selected-payment-type").innerHTML = "Transferencia bancaria";
                 inputsTransfer.forEach((input)=>{input.disabled = false;});
                 inputsCreditCard.forEach((input)=>{input.disabled = true;});
             }
@@ -39,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function(){
             event.preventDefault()
             event.stopPropagation()
           }
+          validate();
   
           form.classList.add('was-validated')
         }, false)
@@ -47,11 +50,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function validate() 
 {
+    let paymentTypeIsSelected = document.querySelectorAll("input[name=payment-type]:checked").length > 0;
 
-    let shipmentTypeIsSelected = document.querySelectorAll("input[name=shipment-type]:checked").length > 0; 
-    let paymentTypeIsSelected = document.querySelectorAll("input[name=shipment-type]:checked").length > 0;
-    
-  
+    if (!document.getElementById("selected-payment-type-error").classList.contains('d-none')){
+        document.getElementById("selected-payment-type-error").classList.add("d-none");
+    }
+
+    if(!paymentTypeIsSelected){
+        document.getElementById("selected-payment-type-error").classList.remove("d-none");
+    }
 }
 
 function updateCosts(){
@@ -69,7 +76,7 @@ function updateCosts(){
     let radios = document.getElementsByName("shipment-type");
     let selected = Array.from(radios).find(radio => radio.checked);
     let shippingPercentage = 0;
-    if (selected!=undefined){
+    if (selected != undefined) {
         shippingPercentage = selected.value;
     }
     shippingCost = shippingPercentage*subtotal;
@@ -99,7 +106,7 @@ function addRow (product){
     <th scope="row"><img src="${product.image}" height="50"/></th>
     <td>${product.name}</td>
     <td>${product.unitCost}</td>
-    <td><input type="number" min="1" onchange="updatePrice(${product.id}, ${product.unitCost}, this)" value="${product.count}"/></td>
+    <td><input type="number" min="1" required onchange="updatePrice(${product.id}, ${product.unitCost}, this)" value="${product.count}"/><div class="invalid-feedback">No puede estar vacio y debe ser mayor a 0</div></td>
     <td>${product.currency} <span id="${product.id}-price">${product.unitCost*product.count}</td>
   </tr>`;
 }
@@ -147,7 +154,5 @@ function syncCart()
         buildCart(articles);
     });
 }
+
 syncCart();
-
-
-
