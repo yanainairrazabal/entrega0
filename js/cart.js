@@ -48,17 +48,44 @@ document.addEventListener("DOMContentLoaded", function(){
       })
   })()
 
+function missingFieldForTransfer() {
+    return document.getElementById("account-number").value.length < 1;
+}
+
+function missingFieldForCreditCard() {
+    return document.getElementById("card-number").value.length < 1 || 
+    document.getElementById("card-ccv").value.length < 1 || 
+    document.getElementById("card-expiry").value.length < 1;
+}
+
 function validate() 
 {
     let paymentTypeIsSelected = document.querySelectorAll("input[name=payment-type]:checked").length > 0;
+
+    let isSelectedOrAnyFieldEmpty = false;
 
     if (!document.getElementById("selected-payment-type-error").classList.contains('d-none')){
         document.getElementById("selected-payment-type-error").classList.add("d-none");
     }
 
     if(!paymentTypeIsSelected){
-        document.getElementById("selected-payment-type-error").classList.remove("d-none");
+        isSelectedOrAnyFieldEmpty = true;
+    }else{
+        if(document.querySelectorAll("input[name=payment-type]:checked")[0].value == "transfer") {
+            isSelectedOrAnyFieldEmpty = missingFieldForTransfer();
+            console.log(missingFieldForTransfer());
+        }else{
+            isSelectedOrAnyFieldEmpty = missingFieldForCreditCard();
+            console.log(missingFieldForCreditCard());
+        }
     }
+
+    if(isSelectedOrAnyFieldEmpty){
+        document.getElementById("selected-payment-type-error").classList.remove("d-none");
+        return false;
+    }
+
+    return true;
 }
 
 function updateCosts(){
