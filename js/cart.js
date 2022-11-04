@@ -113,7 +113,7 @@ function updateCosts(){
     document.getElementById("total").innerHTML= Math.round(total);
 }
 
-function updatePrice(productId, productPrice, el)
+function updatePrice(productId, el)
 {
     let cart = localStorage.getItem("cart");
     cart = JSON.parse(cart);
@@ -133,7 +133,7 @@ function addRow (product){
     <th scope="row"><img src="${product.image}" height="50"/></th>
     <td>${product.name}</td>
     <td>${product.unitCost}</td>
-    <td><input type="number" min="1" required onchange="updatePrice(${product.id}, ${product.unitCost}, this)" value="${product.count}"/><div class="invalid-feedback">No puede estar vacio y debe ser mayor a 0</div></td>
+    <td><input type="number" min="1" required onchange="updatePrice(${product.id}, this)" value="${product.count}"/><div class="invalid-feedback">No puede estar vacio y debe ser mayor a 0</div></td>
     <td>${product.currency} <span id="${product.id}-price">${product.unitCost*product.count}</td>
   </tr>`;
 }
