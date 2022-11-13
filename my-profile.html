@@ -60,12 +60,80 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="container only-logged mt-5">
+        <div class="d-flex flex-row d-flex justify-content-between">
+          <div class="justify-content-start">
+            <h1>Perfil</h1>
+          </div>
+            <div class="justify-content-end">
+                <img id="profile-user" class="rounded-circle" width="200" height="200" src="https://via.placeholder.com/150" class="img-fluid img-thumbnail" alt="profile img">
+            </div>
+        </div>
+        <hr class="mb-3">
+      <form id="form-profile" class="form row needs-validation" novalidate>
+        <div class="col-6">
+          <div class="form-group p-2">
+            <label for="name">Primer nombre(*)</label>
+            <input id="name" type="text" class="form-control" required>
+            <div class="invalid-feedback">El campo no puede estar vacio</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group p-2">
+            <label for="middlename">Segundo nombre</label>
+            <input id="middlename" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group p-2">
+            <label for="lastname">Primer apellido(*)</label>
+            <input id="lastname" type="text" class="form-control" required>
+            <div class="invalid-feedback">El campo no puede estar vacio</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group p-2">
+            <label for="lastname2">Segundo apellido</label>
+            <input id="lastname2" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group p-2">
+            <label for="email">Email(*)</label>
+            <input id="email" type="email" class="form-control" placeholder="example@hotmail.com" required>
+            <div class="invalid-feedback">El campo no puede estar vacio</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group p-2">
+            <label for="phone">Teléfono</label>
+            <input id="phone" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group p-2">
+            <label for="imagen" class="form-label">Imagen perfil</label>
+            <input class="form-control" type="file" id="imagen">
+          </div>
+        </div>
+        <hr class="mt-5 mb-3">
+      <button id="save-changes" type="submit" class="btn btn-success">Guardar cambios</button>
+    </form>
     </div>
   </main>
+  <div class="modal" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Perfil</h1>
+        </div>
+        <div class="modal-body">
+          <p>Para poder ver o editar el perfil, es necesario haber ingresado.</p>
+          <p><a class="" href="login.html">Ingresar</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
